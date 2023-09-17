@@ -25,7 +25,11 @@ def valid_date(day,month,year):
    return True
 
 def years_passed(date_1,date_2):
-   #Assumes date_2 > date_1
+   dates = dates_ascending(date_1,date_2)
+   date_1 = dates[0]
+   date_2 = dates[1]
+   #Wanted to make this much simpler by using * to unpack list, but kept getting errors
+
    years = date_2[2] - date_1[2]
    if date_2[1] < date_1[1]:
       years -= 1
@@ -33,7 +37,11 @@ def years_passed(date_1,date_2):
       if date_2[0] < date_1[0]:
          years -= 1
    return years
-     # it's not letting me indent it correctly - struggling to figure out why... :/
+ 
+def dates_ascending(date_1,date_2):
+   #Function to sort dates into ascending order
+   return sorted([date_1,date_2], key = lambda date: (date[2],date[1],date[0]))
+
 
 today = [int(period) for period in str(date.today()).split("-")[::-1]]
 date = ask_user_for_date("Please enter a date (dd-mm-yyyy): ")
